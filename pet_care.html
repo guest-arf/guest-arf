@@ -1,0 +1,109 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Virtual Pet Care</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 50px;
+        }
+        .status {
+            margin: 20px 0;
+        }
+        .pet-name {
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .stat {
+            font-size: 20px;
+            margin: 5px 0;
+        }
+        button {
+            padding: 10px 20px;
+            margin: 10px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Raise a Floppa HTML Edition</h1>
+    <div class="pet-container">
+        <p class="pet-name">Floppa</p>
+        <img src="floppa.jpg" alt="Floppa" width="200" height="200"></a>
+        <div class="status">
+            <p class="stat">Hunger: <span id="hunger">50</span>%</p>
+            <p class="stat">Energy: <span id="energy">70</span>%</p>
+            <p class="stat">Happiness: <span id="happiness">80</span>%</p>
+        </div>
+    </div>
+
+    <div class="actions">
+        
+        <button id="sleep-btn">Sleep</button>
+        <button id="feed-btn">Feed</button>
+        <button id="play-btn">Play</button>
+        <button id="reset-btn">Reset</button>
+    </div>
+
+    <script>
+        // Initial status values
+        let hunger = 50;
+        let energy = 70;
+        let happiness = 80;
+
+        // Update pet stats on the page
+        function updateStats() {
+            document.getElementById('energy').innerText = energy;
+            document.getElementById('happiness').innerText = happiness;
+            document.getElementById('hunger').innerText = hunger;
+
+        }
+
+        // Event listeners for buttons
+        document.getElementById('feed-btn').addEventListener('click', function() {
+            hunger = Math.max(hunger - 10, 0); // Decrease hunger, minimum 0
+            energy = Math.min(energy + 5, 100); // Increase energy, max 100
+            updateStats();
+        });
+
+        document.getElementById('play-btn').addEventListener('click', function() {
+            happiness = Math.min(happiness + 10, 100); // Increase happiness, max 100
+            energy = Math.max(energy - 10, 0); // Decrease energy
+            updateStats();
+        });
+
+        document.getElementById('sleep-btn').addEventListener('click', function() {
+            energy = Math.min(energy + 20, 100); // Increase energy, max 100
+            happiness = Math.min(happiness + 5, 100); // Slightly increase happiness
+            hunger = Math.min(hunger + 10, 100); // Increase hunger while sleeping
+            updateStats();
+        });
+
+        // Reset stats to zero
+        document.getElementById('reset-btn').addEventListener('click', function() {
+            hunger = 0;
+            energy = 0;
+            happiness = 0;
+            updateStats();
+        });
+
+        // Automatic stat changes over time
+        setInterval(function() {
+            hunger = Math.min(hunger + 1, 100); // Hunger increases over time
+            energy = Math.max(energy - 1, 0); // Energy decreases over time
+            happiness = Math.max(happiness - 1, 0); // Happiness decreases over time
+            updateStats();
+        }, 5000); // Update every 5 seconds
+
+    </script>
+
+</body>
+</html>
+
+<body>Credit to Faruklmu17 for the code [I, Guest Arf, just modified it]</body>
